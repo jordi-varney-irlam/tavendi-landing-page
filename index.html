@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tavendi - Secure Marketplace Payments Coming Soon</title>
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --radioactive-grass: #7ede49;
+            --baltic-blue: #085698;
+            --onyx: #131112;
+            --pale-sky: #bfcde0;
+            --white: #fefcfd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--onyx);
+            background: linear-gradient(to bottom, #085698 0%, #085698 60%, #47a485 80%, #7ede49 100%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100vh;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--baltic-blue);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid transparent;
+            transition: background 0.3s ease, box-shadow 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(254, 252, 253, 0.764);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid rgb(255, 255, 255);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-white {
+            opacity: 1;
+            margin-left: 40px;
+        }
+
+        .logo-color {
+            opacity: 0;
+            position: absolute;
+            left: 40px;
+        }
+
+        header.scrolled .logo-white {
+            opacity: 0;
+        }
+
+        header.scrolled .logo-color {
+            opacity: 1;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+            margin-right: 40px;
+        }
+
+        .header-btn {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Signika', sans-serif;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(68, 48, 48, 0.3);
+        }
+
+        .btn-visit {
+            background: rgba(126, 222, 73, 0.8);
+            color: var(--black);
+        }
+
+        .btn-visit:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-download {
+            background: var(--white);
+            color: var(--baltic-blue);
+        }
+
+        .btn-download:hover {
+            background: var(--radioactive-grass);
+            color: var(--onyx);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: transparent;
+            color: var(--white);
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: visible;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            opacity: 0;
+            animation: fadeInBounce 1s ease forwards 1.5s;
+        }
+
+        .scroll-indicator svg {
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .scroll-indicator:hover {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes fadeInBounce {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+                animation: bounce 2s infinite;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-15px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-8px);
+            }
+        }
+
+        /* Floating Icons Container */
+        .floating-icons-container {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 400px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-icons-container-left {
+            position: absolute;
+            left: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 400px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-icon-card {
+            position: absolute;
+            background: rgba(0, 0, 0, 0);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-icon-card:hover {
+            transform: translateY(-10px) scale(1.05) !important;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Position each card - RIGHT SIDE */
+        .floating-icons-container .floating-icon-card:nth-child(1) {
+            top: 0;
+            right: 0;
+            width: 140px;
+            height: 140px;
+            animation: float1 4s ease-in-out infinite;
+        }
+
+        .floating-icons-container .floating-icon-card:nth-child(2) {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 160px;
+            height: 160px;
+            animation: float2 5s ease-in-out infinite 0.5s;
+        }
+
+        .floating-icons-container .floating-icon-card:nth-child(3) {
+            bottom: 0;
+            right: 20px;
+            width: 130px;
+            height: 130px;
+            animation: float3 4.5s ease-in-out infinite 1s;
+        }
+
+        /* Position each card - LEFT SIDE (mirrored) */
+        .floating-icons-container-left .floating-icon-card:nth-child(1) {
+            top: 0;
+            left: 0;
+            width: 140px;
+            height: 140px;
+            animation: float1 4s ease-in-out infinite 0.3s;
+        }
+
+        .floating-icons-container-left .floating-icon-card:nth-child(2) {
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 160px;
+            height: 160px;
+            animation: float2 5s ease-in-out infinite 0.8s;
+        }
+
+        .floating-icons-container-left .floating-icon-card:nth-child(3) {
+            bottom: 0;
+            left: 20px;
+            width: 130px;
+            height: 130px;
+            animation: float3 4.5s ease-in-out infinite 0.2s;
+        }
+
+        .floating-icon-card img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        /* Floating animations */
+        @keyframes float1 {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        @keyframes float2 {
+            0%, 100% {
+                transform: translateY(-50%) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-70px) rotate(-5deg);
+            }
+        }
+
+        @keyframes float3 {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(3deg);
+            }
+        }
+
+        /* Wave Dividers */
+        .wave-divider {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+        }
+
+        .wave-divider svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            animation: wave 10s linear infinite;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--radioactive-grass);
+            color: var(--onyx);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Signika', sans-serif;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .highlight {
+            color: #7ede49
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Signika', sans-serif;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        /* App Badges Section */
+        .app-badges-section {
+            padding: 40px 20px 80px;
+            text-align: center;
+            background: transparent;
+        }
+
+        .app-badges-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .app-badge {
+            height: 60px;
+            width: auto;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .app-badge:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background: transparent;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--white);
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: rgba(254, 252, 253, 0.95);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2) {
+            transition-delay: 0.25s;
+        }
+
+        .feature-card:nth-child(3) {
+            transition-delay: 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .feature-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            color: var(--baltic-blue);
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--onyx);
+            opacity: 0.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: transparent;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: var(--white);
+            opacity: 0.85;
+            margin-bottom: 40px;
+        }
+
+        /* Form */
+        .email-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .email-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 16px 20px;
+            border: 2px solid var(--white);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            background-color: var(--white);
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--onyx);
+        }
+
+        .submit-btn {
+            padding: 16px 40px;
+            background-color: var(--onyx);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Signika', sans-serif;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(19, 17, 18, 0.4);
+            background-color: var(--baltic-blue);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .form-note {
+            font-size: 14px;
+            color: var(--onyx);
+            opacity: 0.75;
+            margin-top: 15px;
+        }
+
+        /* Trust Indicators */
+        .trust-section {
+            padding: 0px 20px;
+            background: transparent;
+            text-align: center;
+        }
+
+        .trust-stats {
+            display: flex;
+            justify-content: center;
+            gap: 140px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat {
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .stat.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stat:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .stat:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .stat:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            font-family: 'Signika', sans-serif;
+            color: var(--white);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--white);
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: transparent;
+            color: var(--onyx);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.85;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background-color: var(--onyx);
+            color: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 600;
+            font-family: 'Signika', sans-serif;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* ========== ANIMATIONS ========== */
+
+        /* Fade in animation for scroll-triggered elements */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero text animations */
+        .hero h1 {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+
+        .hero p {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.6s;
+        }
+
+        .hero .badge {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating animation for feature cards */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Icon spin on hover */
+        .feature-icon img {
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover .feature-icon img {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        /* Button ripple effect */
+        .submit-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .submit-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Glowing button pulse */
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(19, 17, 18, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(19, 17, 18, 0.6), 0 0 30px rgba(126, 222, 73, 0.3);
+            }
+        }
+
+        .submit-btn {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .floating-icons-container {
+                right: 5%;
+                width: 250px;
+                height: 350px;
+            }
+
+            .floating-icons-container-left {
+                left: 5%;
+                width: 250px;
+                height: 350px;
+            }
+
+            .floating-icons-container .floating-icon-card:nth-child(1),
+            .floating-icons-container-left .floating-icon-card:nth-child(1) {
+                width: 120px;
+                height: 120px;
+            }
+
+            .floating-icons-container .floating-icon-card:nth-child(2),
+            .floating-icons-container-left .floating-icon-card:nth-child(2) {
+                width: 140px;
+                height: 140px;
+            }
+
+            .floating-icons-container .floating-icon-card:nth-child(3),
+            .floating-icons-container-left .floating-icon-card:nth-child(3) {
+                width: 110px;
+                height: 110px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .email-input {
+                min-width: 100%;
+            }
+
+            .trust-stats {
+                gap: 40px;
+            }
+
+            .stat-number {
+                font-size: 36px;
+            }
+
+            .header-buttons {
+                gap: 10px;
+            }
+
+            .header-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .app-badge {
+                height: 50px;
+            }
+
+            /* Hide floating icons on mobile */
+            .floating-icons-container,
+            .floating-icons-container-left {
+                display: none;
+            }
+
+            /* Keep scroll indicator visible on mobile */
+            .scroll-indicator svg {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .header-container {
+                justify-content: center;
+                padding: 0 20px;
+                /*flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                text-align: center;*/
+            }
+
+            .logo-white {
+                margin-right: 260px;
+            }
+            .logo-color {
+                  /* override absolute positioning */
+                left: 40px;
+            }
+
+            .header-buttons {
+                margin-right: 0;      /* remove desktop spacing */
+                position: absolute;
+                right: 20px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .features {
+                padding: 60px 20px;
+            }
+
+            .cta-section {
+                padding: 60px 20px;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .logo {
+                height: 40px;
+            }
+
+            .app-badge {
+                height: 45px;
+            }
+
+            .scroll-indicator svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <img src="images/tavendi-white.png" alt="Tavendi" class="logo logo-white">
+            <img src="images/tavendi-logo.png" alt="Tavendi" class="logo logo-color">
+            <div class="header-buttons">
+                <a href="https://www.tavendi.com/" class="header-btn btn-visit" target="_blank">Visit Page</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Floating Icons Container - LEFT -->
+        <div class="floating-icons-container-left">
+            <div class="floating-icon-card">
+                <img src="images/icon-shield.png" alt="Security Shield">
+            </div>
+            <div class="floating-icon-card">
+                <img src="images/icon-link.png" alt="Secure Lock">
+            </div>
+            <div class="floating-icon-card">
+                <img src="images/tavendi-tag-white.png" alt="Tavendi Tag">
+            </div>
+        </div>
+
+        <!-- Floating Icons Container - RIGHT -->
+        <div class="floating-icons-container">
+            <div class="floating-icon-card">
+                <img src="images/icon-lock.png" alt="Secure Lock">
+            </div>
+            <div class="floating-icon-card">
+                <img src="images/tavendi-tag.png" alt="Security Shield">
+            </div>
+            <div class="floating-icon-card">
+                <img src="images/icon-check.png" alt="Verified Check">
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <span class="badge">Coming Soon</span>
+            <h1>Buy & sell <span class="highlight">securely</span> on Marketplace</h1>
+            <p>We're developing a secure payment system to help you say goodbye to scams.</p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <a href="#cta-section" class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="#7ede49" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+    </section>
+
+    <!-- Wave Divider (after hero) -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+            <path d="M0,30 Q150,10 300,30 T600,30 T900,30 T1200,30 T1500,30 T1800,30 T2100,30 T2400,30 L2400,70 Q2250,90 2100,70 T1800,70 T1500,70 T1200,70 T900,70 T600,70 T300,70 T0,70 Z" fill="rgba(255, 255, 255, 0.15)"/>
+        </svg>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta-section">
+        <div class="cta-content">
+            <h2>Be the first to know</h2>
+            <p>We're actively developing this feature and want your input. Join our early access list if you're interested!</p>
+
+            <form class="email-form" action="https://formspree.io/f/xkovjokr" method="POST">
+                <input
+                    type="email"
+                    name="email"
+                    class="email-input"
+                    placeholder="Enter your email address"
+                    required
+                >
+                <button type="submit" class="submit-btn">Get Early Access</button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                Thank you! We'll keep you updated on our anti-scam feature development.
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">How Our Anti-Scam Feature Will Protect You</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="images/icon-link.png" alt="Secure Payments">
+                    </div>
+                    <h3>Vault Link</h3>
+                    <p>Seller creates a link to a vault.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="images/icon-lock.png" alt="Buyer Protection">
+                    </div>
+                    <h3>Buyer Protection</h3>
+                    <p>Buyer funds and secures the vault.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="images/icon-check.png" alt="Seller Security">
+                    </div>
+                    <h3>Seller Security</h3>
+                    <p>Money is held safely until both parties verify transation!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-stats">
+                <div class="stat">
+                    <span class="stat-number">$100+</span>
+                    <span class="stat-label">Potential Scam Prevention</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Secure Transactions</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Protection & Support</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- App Badges Section -->
+    <section class="app-badges-section">
+        <div class="app-badges-container">
+            <a href="https://apps.apple.com/us/app/tavendi/id6745490885" target="_blank">
+                <img src="images/app-store-badge.svg" alt="Download on the App Store" class="app-badge">
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.tavendi&hl=en" target="_blank">
+                <img src="images/google-play-badge.png" alt="Get it on Google Play" class="app-badge">
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Tavendi. Making marketplace transactions safer for everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Wave animation speed on scroll
+        let scrollTimeout;
+        const waveSvgs = document.querySelectorAll('.wave-divider svg');
+
+        window.addEventListener('scroll', function() {
+            // Speed up wave during scroll by changing playback rate
+            waveSvgs.forEach(svg => {
+                const animations = svg.getAnimations();
+                animations.forEach(anim => {
+                    anim.playbackRate = 2.5; // 2.5x faster
+                });
+            });
+
+            // Clear existing timeout
+            clearTimeout(scrollTimeout);
+
+            // Slow back down after scrolling stops
+            scrollTimeout = setTimeout(function() {
+                waveSvgs.forEach(svg => {
+                    const animations = svg.getAnimations();
+                    animations.forEach(anim => {
+                        anim.playbackRate = 1; // Normal speed
+                    });
+                });
+            }, 150);
+
+            // Hide scroll indicator after user scrolls
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (window.scrollY > 100 && scrollIndicator) {
+                scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.pointerEvents = 'none';
+            } else if (scrollIndicator) {
+                scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.pointerEvents = 'auto';
+            }
+        });
+
+        // ========== SCROLL-TRIGGERED ANIMATIONS ==========
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+            // Add floating animation after fade in
+            card.addEventListener('transitionend', function() {
+                this.style.animation = 'float 3s ease-in-out infinite';
+            }, { once: true });
+        });
+
+        // Observe stats for counter animation
+        document.querySelectorAll('.stat').forEach(stat => {
+            observer.observe(stat);
+        });
+
+        // Observe CTA section
+        const ctaSection = document.querySelector('.cta-section');
+        if (ctaSection) {
+            observer.observe(ctaSection);
+        }
+
+        // ========== COUNTER ANIMATION FOR STATS ==========
+
+        function animateCounter(element, target, duration, suffix = '', prefix= '') {
+            let current = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = prefix + target + suffix;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = prefix + Math.floor(current) + suffix;
+                }
+            }, 16);
+        }
+
+        // Trigger counter when stats become visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumber = entry.target.querySelector('.stat-number');
+                    const text = statNumber.textContent;
+
+                    // Parse the stat value
+                    if (text.includes('$100+')) {
+                        animateCounter(statNumber, 100, 1500, '+', '$');
+                    } else if (text.includes('100%')) {
+                        animateCounter(statNumber, 100, 1500, '%');
+                    } else if (text.includes('24/7')) {
+                        // Special handling for 24/7
+                        let count = 0;
+                        const timer = setInterval(() => {
+                            count++;
+                            if (count <= 24) {
+                                statNumber.textContent = count + '/7';
+                            } else {
+                                statNumber.textContent = '24/7';
+                                clearInterval(timer);
+                            }
+                        }, 50);
+                    }
+
+                    entry.target.classList.add('visible');
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+    </script>
+</body>
+</html>
